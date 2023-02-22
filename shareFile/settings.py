@@ -86,9 +86,9 @@ DATABASES = {
     }
 }
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://xcloud.up.railway.app/'
-]
+CSRF_TRUSTED_ORIGINS = ['https://xcloud.up.railway.app/', 'https://*.127.0.0.1']
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
