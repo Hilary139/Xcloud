@@ -7,7 +7,10 @@ from .models import User, Post
 from django.http import HttpResponse
 from django.contrib import messages
 
+from django.views.decorators.csrf import csrf_exempt
+#from django.views.csrf.decorators import csrf_exempt
 # Create your views here.
+@csrf_exempt
 class HomePageView(ListView):
     def get(self, request):
         '''
@@ -39,7 +42,9 @@ class HomePageView(ListView):
 
 
 
+
 # Create Upload File System
+@csrf_exempt
 class UploadView(ListView):
     def get(self, request, user_name):
         return render(request, 'upload_file.html')
@@ -59,6 +64,7 @@ class UploadView(ListView):
 
 
 # View User Profile
+@csrf_exempt
 class ProfileView(ListView):
     def get(self, request, user_name):
         user_obj = User.objects.get(username=user_name)
@@ -68,7 +74,7 @@ class ProfileView(ListView):
 
 
 # Post Delete View
-
+@csrf_exempt
 class DeleteView(ListView):
     model = Post
     def get(self, request, post_id):
@@ -80,6 +86,7 @@ class DeleteView(ListView):
 
 
 # Search View
+@csrf_exempt
 class SearchView(ListView):
     def get(self, request):
         query = request.GET['query']
@@ -93,6 +100,7 @@ class SearchView(ListView):
 
 
 # Login System
+@csrf_exempt
 class LoginView(ListView):
     def get(self, request):
         return redirect('home')
@@ -110,7 +118,8 @@ class LoginView(ListView):
             messages.warning(request, 'Invalid Username or Password.')
             return redirect('index')
         return redirect('index')
-
+        
+@csrf_exempt
 class LogoutView(ListView):
     def get(self, request):
         try:
